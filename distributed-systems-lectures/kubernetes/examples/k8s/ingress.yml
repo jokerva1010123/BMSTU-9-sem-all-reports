@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-frontend-ingress
+  labels:
+    app.kubernetes.io/name: simple-frontend-ingress
+    app.kubernetes.io/version: "v1.0"
+    app.kubernetes.io/component: application
+    app.kubernetes.io/part-of: simple
+    app.kubernetes.io/managed-by: helm
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: simple-frontend.romanow-alex.ru
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: simple-frontend
+                port:
+                  number: 3000

@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  postgres:
+    image: library/postgres:13
+    container_name: postgres
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: postgres
+    volumes:
+      - ./postgres/:/docker-entrypoint-initdb.d/
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - database-network
+
+  simple-backend:
+    image: romanowalex/simple-backend:v1.0
+    container_name: simple-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - postgres
+    networks:
+      - database-network
+      - frontend-network
+
+  simple-frontend:
+    image: romanowalex/simple-frontend:v1.0
+    container_name: simple-frontend
+    restart: on-failure
+    ports:
+      - "3000:80"
+    depends_on:
+      - simple-backend
+    networks:
+      - frontend-network
+
+networks:
+  frontend-network:
+    name: frontend-network
+    driver: bridge
+  database-network:
+    name: database-network
+    driver: bridge
+
+volumes:
+  db-data:
