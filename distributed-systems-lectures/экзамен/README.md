@@ -34,7 +34,7 @@
 - По взаимодействию (Communication Cohesion) – части модуля работают над одним и теми же данными.
 - По последовательности действий (Sequential Cohesion) – результат работы одной части модуля является исходными данными для другой.
 - Функциональная (Functional Cohesion) – части модуля направлены на решение одной четкой задачи, за которую отвечает модуль.
-![](../decompose_into_microservices/images/cohesion.png)
+![types](../decompose_into_microservices/images/Cohesion%20Types.png)
 ### 3. Проектирование микросервисов: декомпозиция по бизнес возможностям и Domain Driven Design. Что такое Bounded Context и чем он отличается от бизнес-сущности.
 ### 4. Маршрутизация в сети интернет.
 ### 5. Протокол TCP. Гарантия доставки. Flow Control и Congestion Control.
